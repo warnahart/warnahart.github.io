@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warnah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/Fabicon.png" type="image/png">
+    <style>
+        :root {
+            --primary-color-1: #6a11cb;
+            --primary-color-2: #2575fc;
+            --accent-color: #ec008c;
+            --text-color: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.1);
+            --border-glass: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DynaPuff', cursive;
+            background: linear-gradient(45deg, var(--primary-color-1), var(--primary-color-2), var(--accent-color));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        body.nav-open {
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .hamburger-menu {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 24px;
+            z-index: 1001;
+        }
+
+        .hamburger-menu span {
+            width: 30px;
+            height: 3px;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hamburger-menu span:nth-child(1) { background: #00ff19; }
+        .hamburger-menu span:nth-child(2) { background: var(--text-color); }
+        .hamburger-menu span:nth-child(3) { background: #ff79d2; }
+
+        body.nav-open .hamburger-menu span:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+        body.nav-open .hamburger-menu span:nth-child(2) {
+            opacity: 0;
+        }
+        body.nav-open .hamburger-menu span:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        body.nav-open .nav-overlay {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .overlay-menu {
+            list-style: none;
+            text-align: center;
+        }
+
+        .overlay-menu li {
+            margin: 2rem 0;
+        }
+
+        .overlay-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 2.5rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .overlay-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Header */
+        .main-header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative; /* Added for positioning context */
+        }
+
+        .main-header h1 {
+            font-size: 18vw;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(0,0,0,0.2);
+            line-height: 1;
+            display: flex;
+        }
+
+        .main-header h1 .char {
+            display: inline-block;
+            animation-name: bounce-in-place;
+            animation-duration: 1.5s;
+            animation-fill-mode: forwards; /* Stay at the final state */
+        }
+
+        @keyframes bounce-in-place {
+            0%   { transform: scale(1,1)      translateY(0); }
+            10%  { transform: scale(1.1,.9)   translateY(0); }
+            30%  { transform: scale(.9,1.1)   translateY(-60px); }
+            50%  { transform: scale(1.05,.95) translateY(0); }
+            57%  { transform: scale(1,1)      translateY(-7px); }
+            64%  { transform: scale(1,1)      translateY(0); }
+            100% { transform: scale(1,1)      translateY(0); }
+        }
+
+        /* Stagger the animation delay */
+        .main-header h1 .char:nth-child(1) { animation-delay: 0.1s; }
+        .main-header h1 .char:nth-child(2) { animation-delay: 0.2s; }
+        .main-header h1 .char:nth-child(3) { animation-delay: 0.3s; }
+        .main-header h1 .char:nth-child(4) { animation-delay: 0.4s; }
+        .main-header h1 .char:nth-child(5) { animation-delay: 0.5s; }
+        .main-header h1 .char:nth-child(6) { animation-delay: 0.6s; }
+
+        .header-overlay-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px; /* Adjust size as needed */
+            pointer-events: none; /* Prevents image from blocking text interaction */
+            opacity: 0.9;
+            transform: translate(-55%, 15%);
+        }
+
+        .main-header .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 0.5rem;
+        }
+
+        .main-header h1, .main-header .subtitle {
+            transform: translateY(-6rem); /* Moves text up */
+        }
+
+        /* Section Base */
+        .section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--text-color);
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+        
+        /* About Section */
+        #about p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Collections Section */
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .collection-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .collection-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .collection-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-card p {
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        a.collection-card {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        /* Community Section */
+        .social-links {
+            margin-top: 3rem;
+        }
+
+        .social-btn {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--text-color);
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            margin: 0 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        .main-footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-header h1 {
+                font-size: 12vw;
+            }
+            .header-overlay-image {
+                width: 120px;
+                /* Animation for mobile needs to match */
+                animation: none; /* Optional: disable on mobile if too distracting */
+                opacity: 0.9;
+                transform: translate(-50%, -50%);
+            }
+            .main-header .subtitle {
+                font-size: 1.2rem;
+            }
+            .section {
+                padding: 4rem 0;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+            .social-btn {
+                display: block;
+                margin: 1rem auto;
+                width: 80%;
+            }
+            .overlay-menu a {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="main-nav">
+        <a href="#" class="nav-logo">Warnah</a>
+        <button class="hamburger-menu" aria-label="Open Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="nav-overlay">
+        <ul class="overlay-menu">
+            <li><a href="#about" class="overlay-link">About</a></li>
+            <li><a href="#collections" class="overlay-link">Collections</a></li>
+            <li><a href="#community" class="overlay-link">Community</a></li>
+        </ul>
+    </div>
+
+    <header class="main-header">
+        <h1>
+            <span class="char">W</span><span class="char">A</span><span class="char">R</span><span class="char">N</span><span class="char">A</span><span class="char">H</span>
+        </h1>
+        <img src="images/WARNAH .gif" alt="" class="header-overlay-image">
+        <p class="subtitle">Welcome To The Colorful Club!</p>
+    </header>
+
+    <main>
+        <section id="about" class="section container">
+            <h2 class="section-title">About the Artist</h2>
+            <p>
+                Warnah is a digital artist exploring the vibrant intersection of technology and emotion. Through generative art and handcrafted digital painting, Warnah creates collections that are not just visually stunning, but rich with narrative and meaning. Each piece is a unique exploration of color, form, and the digital soul.
+            </p>
+        </section>
+
+        <section id="collections" class="section container">
+            <h2 class="section-title">Collections</h2>
+            <div class="collections-grid">
+                <!-- Collection 1 -->
+                <a href="https://xrp.cafe/collection/warnah" target="_blank" rel="noopener noreferrer" class="collection-card">
+                    <img src="images/W.KID004.png" alt="XRP">
+                    <h3>XRP</h3>
+                    <p>A collection that explores the concept of time through intricate, evolving patterns. Each piece represents a unique moment, frozen in a beautiful digital tapestry.</p>
+                </a>
+                <!-- Collection 2 -->
+                <a href="polygon.html" class="collection-card">
+                    <img src="images/43ffa0d23f95a6abf7156b30f29725e0.gif" alt="Polygon">
+                    <h3>Polygon</h3>
+                    <p>A nostalgic yet futuristic series that reimagines dreamscapes in a vibrant, pixel-art style. These pieces evoke a sense of wonder and digital adventure.</p>
+                </a>
+                <!-- Collection 3 -->
+                <a href="https://foundation.app/collection/WarnahWarnih" target="_blank" rel="noopener noreferrer" class="collection-card">
+                    <img src="images/Gvl-UqsbsAIWSCx.jpg" alt="Ethereum">
+                    <h3>Ethereum</h3>
+                    <p>Mysterious symbols from a digital dimension. This collection is an exercise in abstract storytelling, where each glyph holds a secret meaning for the viewer to decipher.</p>
+                </a>
+                <!-- Collection 4 -->
+                <a href="https://objkt.com/collections/KT1L2C2A9s8Q8F4yMsKkKKZb46BX9Seo1kJE" target="_blank" rel="noopener noreferrer" class="collection-card">
+                    <img src="images/artifact.gif" alt="Tezos">
+                    <h3>Tezos</h3>
+                    <p>An exploration of nature's forms through a cybernetic lens. This series features fantastical plants and flowers that glow with an inner, electric light.</p>
+                </a>
+                <!-- Collection 5 -->
+                <a href="solana.html" class="collection-card">
+                    <img src="images/hO6WCQn1WjbW3GYxz4SDiSV8qil8ISIPNgl1diqfqds.png" alt="Solana">
+                    <h3>Solana</h3>
+                    <p>A celebration of pure form and color. This collection uses fundamental geometric shapes to create complex, harmonious compositions that are both simple and profound.</p>
+                </a>
+                <!-- Collection 6 -->
+                <a href="https://salvor.io/collections/0x0f23b62e2e3eaf82cc580e54f9e21ca571a0e384" target="_blank" rel="noopener noreferrer" class="collection-card">
+                    <img src="images/5e8ab095-7669-4e36-bce9-562a23b484e5.png" alt="Avelanche">
+                    <h3>Avelanche</h3>
+                    <p>Inspired by the vastness of space, this collection captures the beauty of distant galaxies, nebulae, and cosmic events in a swirl of vibrant, digital color.</p>
+                </a>
+            </div>
+        </section>
+
+        <section id="community" class="section container">
+            <h2 class="section-title">Join the Community</h2>
+            <p>Connect with Warnah and fellow art lovers. Get the latest updates, join discussions, and be part of the journey.</p>
+            <div class="social-links">
+                <a href="https://x.com/warnahxwarnih" class="social-btn" target="_blank" rel="noopener noreferrer">X (Twitter)</a>
+                <a href="https://t.co/tKVkLWuiQO" class="social-btn" target="_blank" rel="noopener noreferrer">Discord</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Warnah. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+<script>
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navOverlay = document.querySelector('.nav-overlay');
+    const overlayLinks = document.querySelectorAll('.overlay-link');
+
+    hamburgerMenu.addEventListener('click', () => {
+        document.body.classList.toggle('nav-open');
+    });
+
+    overlayLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            document.body.classList.remove('nav-open');
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana - Warnah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/Fabicon.png" type="image/png">
+    <style>
+        :root {
+            --primary-color-1: #6a11cb;
+            --primary-color-2: #2575fc;
+            --accent-color: #ec008c;
+            --text-color: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.1);
+            --border-glass: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DynaPuff', cursive;
+            background: linear-gradient(45deg, var(--primary-color-1), var(--primary-color-2), var(--accent-color));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        body.nav-open {
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .hamburger-menu {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 24px;
+            z-index: 1001;
+        }
+
+        .hamburger-menu span {
+            width: 30px;
+            height: 3px;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hamburger-menu span:nth-child(1) { background: #00ff19; }
+        .hamburger-menu span:nth-child(2) { background: var(--text-color); }
+        .hamburger-menu span:nth-child(3) { background: #ff79d2; }
+
+        body.nav-open .hamburger-menu span:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+        body.nav-open .hamburger-menu span:nth-child(2) {
+            opacity: 0;
+        }
+        body.nav-open .hamburger-menu span:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        body.nav-open .nav-overlay {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .overlay-menu {
+            list-style: none;
+            text-align: center;
+        }
+
+        .overlay-menu li {
+            margin: 2rem 0;
+        }
+
+        .overlay-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 2.5rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .overlay-menu a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Header */
+        .page-header {
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 5rem; /* Adjust to move text down */
+        }
+
+        .page-header h1 {
+            font-size: 10vw;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(0,0,0,0.2);
+            line-height: 1;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 0.5rem;
+        }
+
+        /* Section Base */
+        .section {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--text-color);
+            border-radius: 2px;
+            opacity: 0.8;
+        }
+        
+        /* Collections Section */
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .two-column-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .collection-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .collection-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .collection-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .collection-card p {
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        a.collection-card {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        /* Footer */
+        .main-footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            background: rgba(0,0,0,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 15vw;
+            }
+            .section {
+                padding: 4rem 0;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+            .overlay-menu a {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="main-nav">
+        <a href="index.html" class="nav-logo">Warnah</a>
+        <button class="hamburger-menu" aria-label="Open Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="nav-overlay">
+        <ul class="overlay-menu">
+            <li><a href="index.html#about" class="overlay-link">About</a></li>
+            <li><a href="index.html#collections" class="overlay-link">Collections</a></li>
+            <li><a href="index.html#community" class="overlay-link">Community</a></li>
+        </ul>
+    </div>
+
+    <header class="page-header">
+        <h1>SOLANA</h1>
+        <p class="subtitle">A celebration of pure form and color.</p>
+    </header>
+
+    <main>
+        <section class="section container">
+            <h2 class="section-title">Collection Items</h2>
+            <div class="collections-grid two-column-grid">
+                <!-- Item 1 -->
+                <a href="https://walletbubbles.com/warnah" target="_blank" rel="noopener noreferrer" class="collection-card">
+                    <img src="images/Walletbubbles.png" alt="Walletbubbles">
+                    <h3>Walletbubbles</h3>
+                    <p>Simple and cute</p>
+                </a>
+                <!-- Item 2 -->
+                <a href="https://exchange.art/series/warnah/nfts" target="_blank" rel="noopener noreferrer" class="collection-card">
+                    <img src="images/The_Campus.jpg" alt="Exchange Art">
+                    <h3>Exchange Art</h3>
+                    <p>Edition</p>
+                </a>
+                <!-- Item 3 -->
+                <a href="https://www.mallow.art/collection/93D44VYnDa9J8UmvJo3fJgmg49aj8XrsoP7tRHjvQGd5" target="_blank" rel="noopener noreferrer" class="collection-card">
+                    <img src="images/hO6WCQn1WjbW3GYxz4SDiSV8qil8ISIPNgl1diqfqds.png" alt="Solana Item 3">
+                    <h3>Geometric Form #3</h3>
+                    <p>This is a placeholder description. Replace it with the actual details for this item.</p>
+                </a>
+                <!-- Item 4 -->
+                <div class="collection-card">
+                    <img src="images/Artplex.jpg" alt="Artplex">
+                    <h3>Artplex</h3>
+                    <p>Simple</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Warnah. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+<script>
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navOverlay = document.querySelector('.nav-overlay');
+    const overlayLinks = document.querySelectorAll('.overlay-link');
+
+    hamburgerMenu.addEventListener('click', () => {
+        document.body.classList.toggle('nav-open');
+    });
+
+    overlayLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            document.body.classList.remove('nav-open');
+        });
+    });
+</script>
+
+</body>
+</html>
