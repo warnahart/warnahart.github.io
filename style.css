@@ -1,4 +1,4 @@
-        :root {
+:root {
             --primary-color-1: #6a11cb;
             --primary-color-2: #2575fc;
             --accent-color: #ec008c;
@@ -221,6 +221,31 @@
             transform: translateY(-6rem); /* Moves text up */
         }
 
+        /* Page Header for subpages */
+        .page-header {
+            height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 5rem;
+        }
+
+        .page-header h1 {
+            font-size: 10vw;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(0,0,0,0.2);
+            line-height: 1;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-top: 0.5rem;
+        }
+
         /* Section Base */
         .section {
             padding: 6rem 0;
@@ -264,6 +289,10 @@
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2.5rem;
             margin-top: 1rem;
+        }
+
+        .two-column-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .collection-card {
@@ -351,6 +380,9 @@
             .main-header .subtitle {
                 font-size: 1.2rem;
             }
+            .page-header h1 {
+                font-size: 15vw;
+            }
             .section {
                 padding: 4rem 0;
             }
@@ -369,4 +401,3 @@
                 font-size: 2rem;
             }
         }
-    
