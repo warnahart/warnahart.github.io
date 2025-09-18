@@ -81,7 +81,7 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            justify-content: space-around;
+            justify-content: space-between;
             width: 30px;
             height: 24px;
             z-index: 1001;
@@ -90,7 +90,6 @@
         .hamburger-menu span {
             width: 30px;
             height: 3px;
-            border-radius: 2px;
             transition: all 0.3s ease-in-out;
         }
 
@@ -99,13 +98,13 @@
         .hamburger-menu span:nth-child(3) { background: #ff79d2; }
 
         body.nav-open .hamburger-menu span:nth-child(1) {
-            transform: translateY(8.5px) rotate(45deg);
+            transform: translateY(10.5px) rotate(45deg);
         }
         body.nav-open .hamburger-menu span:nth-child(2) {
             opacity: 0;
         }
         body.nav-open .hamburger-menu span:nth-child(3) {
-            transform: translateY(-8.5px) rotate(-45deg);
+            transform: translateY(-10.5px) rotate(-45deg);
         }
 
         .nav-overlay {
@@ -149,7 +148,7 @@
         }
 
         .overlay-menu a:hover {
-            color: var(--accent-color);
+            color: #ff79d2;
         }
 
         /* Header */
@@ -245,6 +244,9 @@
         }
         
         /* About Section */
+        #about {
+            padding-bottom: 0;
+        }
         #about p {
             max-width: 700px;
             margin: 0 auto;
@@ -256,7 +258,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2.5rem;
-            margin-top: 4rem;
+            margin-top: 1rem;
         }
 
         .collection-card {
@@ -267,7 +269,7 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: left;
+            text-align: center;
         }
 
         .collection-card:hover {
@@ -395,7 +397,7 @@
         <section id="about" class="section container">
             <h2 class="section-title">About the Artist</h2>
             <p>
-                Warnah is a digital artist exploring the vibrant intersection of technology and emotion. Through generative art and handcrafted digital painting, Warnah creates collections that are not just visually stunning, but rich with narrative and meaning. Each piece is a unique exploration of color, form, and the digital soul.
+                Warnah is a digital artist exploring the vibrant intersection of technology and emotion. Through handcrafted digital painting, Warnah creates collections that are not just visually stunning, but rich with narrative and meaning. Each piece is a unique exploration of color, form, and the digital soul.
             </p>
         </section>
 
@@ -406,37 +408,31 @@
                 <a href="https://xrp.cafe/collection/warnah" target="_blank" rel="noopener noreferrer" class="collection-card">
                     <img src="images/W.KID004.png" alt="XRP">
                     <h3>XRP</h3>
-                    <p>A collection that explores the concept of time through intricate, evolving patterns. Each piece represents a unique moment, frozen in a beautiful digital tapestry.</p>
                 </a>
                 <!-- Collection 2 -->
                 <a href="polygon.html" class="collection-card">
                     <img src="images/43ffa0d23f95a6abf7156b30f29725e0.gif" alt="Polygon">
                     <h3>Polygon</h3>
-                    <p>A nostalgic yet futuristic series that reimagines dreamscapes in a vibrant, pixel-art style. These pieces evoke a sense of wonder and digital adventure.</p>
                 </a>
                 <!-- Collection 3 -->
                 <a href="https://foundation.app/collection/WarnahWarnih" target="_blank" rel="noopener noreferrer" class="collection-card">
                     <img src="images/Gvl-UqsbsAIWSCx.jpg" alt="Ethereum">
                     <h3>Ethereum</h3>
-                    <p>Mysterious symbols from a digital dimension. This collection is an exercise in abstract storytelling, where each glyph holds a secret meaning for the viewer to decipher.</p>
                 </a>
                 <!-- Collection 4 -->
                 <a href="https://objkt.com/collections/KT1L2C2A9s8Q8F4yMsKkKKZb46BX9Seo1kJE" target="_blank" rel="noopener noreferrer" class="collection-card">
                     <img src="images/artifact.gif" alt="Tezos">
                     <h3>Tezos</h3>
-                    <p>An exploration of nature's forms through a cybernetic lens. This series features fantastical plants and flowers that glow with an inner, electric light.</p>
                 </a>
                 <!-- Collection 5 -->
                 <a href="solana.html" class="collection-card">
                     <img src="images/hO6WCQn1WjbW3GYxz4SDiSV8qil8ISIPNgl1diqfqds.png" alt="Solana">
                     <h3>Solana</h3>
-                    <p>A celebration of pure form and color. This collection uses fundamental geometric shapes to create complex, harmonious compositions that are both simple and profound.</p>
                 </a>
                 <!-- Collection 6 -->
                 <a href="https://salvor.io/collections/0x0f23b62e2e3eaf82cc580e54f9e21ca571a0e384" target="_blank" rel="noopener noreferrer" class="collection-card">
                     <img src="images/5e8ab095-7669-4e36-bce9-562a23b484e5.png" alt="Avelanche">
                     <h3>Avelanche</h3>
-                    <p>Inspired by the vastness of space, this collection captures the beauty of distant galaxies, nebulae, and cosmic events in a swirl of vibrant, digital color.</p>
                 </a>
             </div>
         </section>
