@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://warnahart.github.io/sitemap.xml
