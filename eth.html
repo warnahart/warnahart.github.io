@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polygon - Warnah</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/Fabicon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <a href="index.html" class="nav-logo">Warnah</a>
+        <button class="hamburger-menu" aria-label="Open Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <div class="nav-overlay">
+        <ul class="overlay-menu">
+            <li><a href="index.html#about" class="overlay-link">About</a></li>
+            <li><a href="index.html#collections" class="overlay-link">Collections</a></li>
+            <li><a href="index.html#community" class="overlay-link">Community</a></li>
+        </ul>
+    </div>
+
+    <header class="page-header">
+        <h1>Ethereum</h1>
+    </header>
+
+    <main>
+        <section class="section container">
+            <h2 class="section-title">Collections</h2>
+            <div class="collections-grid two-column-grid">
+                <!-- Item 1 -->
+                <a href="https://www.transient.xyz/@Warnah" target="_blank" rel="noopener noreferrer" class="collection-card">
+                    <img src="images/Stand.gif" alt="Transient">
+                    <h3>Transient</h3>
+                    <p></p>
+                </a>
+                <!-- Item 2 -->
+                <a href="https://foundation.app/collection/WarnahWarnih" target="_blank" rel="noopener noreferrer" class="collection-card">
+                    <img src="images/Gvl-UqsbsAIWSCx.jpg" alt="Warnah Universe">
+                    <h3>Foundation</h3>
+                    <p></p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Warnah. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+<script>
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navOverlay = document.querySelector('.nav-overlay');
+    const overlayLinks = document.querySelectorAll('.overlay-link');
+
+    hamburgerMenu.addEventListener('click', () => {
+        document.body.classList.toggle('nav-open');
+    });
+
+    overlayLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            document.body.classList.remove('nav-open');
+        });
+    });
+</script>
+
+</body>
+</html>
