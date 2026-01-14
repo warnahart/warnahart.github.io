@@ -292,7 +292,7 @@
             background: var(--bg-glass);
             border: 1px solid var(--border-glass);
             border-radius: 15px;
-            padding: 3rem 2rem;
+            padding: 4rem 2rem 3rem 2rem; /* Increased top padding to shift content down */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -328,12 +328,6 @@
         .collection-card p {
             font-size: 0.85rem;
             font-weight: 300;
-        }
-
-        .new-art-text {
-            color: #fb2ac0;
-            font-size: 1.3rem; /* Adjust as needed */
-            display: block; /* To apply margin-top and center with text-align: center */
         }
 
         a.collection-card {
